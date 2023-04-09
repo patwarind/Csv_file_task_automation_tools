@@ -1,52 +1,96 @@
 import tkinter as tk
- 
-window_main = tk.Tk(className='Tkinter - TutorialKart', )
+import pandas as pd, sys, os
+
+global WorkspacePath
+global TargetFileName
+global ResultFileName
+global Formula
+
+
+
+window_main = tk.Tk(className=' Apply Formula To Group Of Files', )
 window_main.geometry("400x200")
 
 
-label_1 = tk.Label(window_main, text='.csv files path')
+label_1 = tk.Label(window_main, text='Workspace Path')
 label_1.place(relx = 0.04, rely = 0)
 
 
 entry_1 = tk.StringVar()
 entry_widget_1 = tk.Entry(window_main, textvariable=entry_1)
 entry_widget_1.pack()
-entry_widget_1.place(relx = 0.35, rely = 0)
+entry_widget_1.place(relx = 0.37, rely = 0)
 
 
 
 
-label_2 = tk.Label(window_main, text='Result file path')
+label_2 = tk.Label(window_main, text='Target File Name (.csv)')
 label_2.place(relx = 0.04, rely = 0.15)
 
 
 entry_2 = tk.StringVar()
 entry_widget_2 = tk.Entry(window_main, textvariable=entry_2)
 entry_widget_2.pack()
-entry_widget_2.place(relx = 0.35, rely = 0.15)
+entry_widget_2.place(relx = 0.37, rely = 0.15)
 
 
 
 
-label_3 = tk.Label(window_main, text='Formula')
+label_3 = tk.Label(window_main, text='Result File Name (.csv)')
 label_3.place(relx = 0.04, rely = 0.3)
 
 
 entry_3 = tk.StringVar()
 entry_widget_3 = tk.Entry(window_main, textvariable=entry_3)
 entry_widget_3.pack()
-entry_widget_3.place(relx = 0.35, rely = 0.3)
+entry_widget_3.place(relx = 0.37, rely = 0.3)
+
+
+
+label_4 = tk.Label(window_main, text='Formula')
+label_4.place(relx = 0.04, rely = 0.45)
+
+
+entry_4 = tk.StringVar()
+entry_widget_4 = tk.Entry(window_main, textvariable=entry_4)
+entry_widget_4.pack()
+entry_widget_4.place(relx = 0.37, rely = 0.45)
 
 
 
 
 def submitValues():
-    print(entry_1.get())
-    print(entry_2.get())
-    print(entry_3.get())
- 
+    WorkspacePath = r"C:\Users\HP\Documents\GitHub\Excel_automation_tools\ApplyFormulaToGroupOfFiles\workspace"#entry_1.get()
+    TargetFileName = "test_file.csv"#entry_2.get()
+    ResultFileName = "result.csv"#entry_3.get() 
+    Formula = "asdas"#entry_4.get()
+
+    for root, dist_list, files_list in os.walk(WorkspacePath):
+        for file_name in files_list:
+            if TargetFileName in file_name:
+                file_name_path = os.path.join(root, file_name)
+                print(file_name_path)
+                df = pd.read_csv(file_name_path, low_memory=False)
+                print(df)
+
+
+    result_data = df
+    result_data.to_csv(WorkspacePath+"\\" + ResultFileName, index=False)
+
+    
+
+    
 submit = tk.Button(window_main, text="Submit", command=submitValues)
 submit.pack()
-submit.place(relx = 0.04, rely = 0.45)
+submit.place(relx = 0.04, rely = 0.60)
+
+
  
 window_main.mainloop()
+
+
+
+
+
+
+
