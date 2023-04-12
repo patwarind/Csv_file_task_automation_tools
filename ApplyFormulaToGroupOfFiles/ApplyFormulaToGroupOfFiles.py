@@ -1,5 +1,6 @@
 import tkinter as tk
 import pandas as pd, sys, os
+import xlsxwriter
 
 global WorkspacePath
 global TargetFileName
@@ -63,7 +64,7 @@ def submitValues():
     WorkspacePath = r"C:\Users\HP\Documents\GitHub\Excel_automation_tools\ApplyFormulaToGroupOfFiles\workspace"#entry_1.get()
     TargetFileName = "test_file.csv"#entry_2.get()
     ResultFileName = "result.csv"#entry_3.get() 
-    Formula = "asdas"#entry_4.get()
+    Formula = "=SUM(B2:B15)"#entry_4.get()
 
     for root, dist_list, files_list in os.walk(WorkspacePath):
         for file_name in files_list:
@@ -71,7 +72,26 @@ def submitValues():
                 file_name_path = os.path.join(root, file_name)
                 print(file_name_path)
                 df = pd.read_csv(file_name_path, low_memory=False)
-                print(df)
+##                print(list(df.columns))
+                workbook = xlsxwriter.Workbook(WorkspacePath+'\\'+'clone_result_file.xlsx')
+                worksheet = workbook.add_worksheet('Summary1')
+
+                for column in range(0, len(list(df.columns))):
+                    worksheet.write(0, column, list(df.columns)[column])
+                    
+                col = 0
+                for label in list(df.columns):
+                    
+                    for row in range(1, len(list(df[label]))+1):
+                        worksheet.write(row, col, list(df[label])[row-1])
+                    col = col + 1
+
+                worksheet1 = workbook.add_worksheet('Summary2')
+                worksheet1.write_formula('K8', Formula)
+                worksheet1.activate()
+                worksheet.hide()
+                workbook.close()
+                
 
 
     result_data = df
