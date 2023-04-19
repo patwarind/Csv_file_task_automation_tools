@@ -1,7 +1,7 @@
 # Excel_automation_tools
 Tools used for excel task automation
 
-I am creatting tools to speed up some tasks involving .csv and .xlsx file format. 
+I am designing tools to speed up some tasks involving .csv and .xlsx file format. 
 
 
 A] Tool_1: ApplyFormulasToGroupOfFiles_v0.1
