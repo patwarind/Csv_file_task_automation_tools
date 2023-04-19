@@ -1,6 +1,10 @@
 """
+Date: April, 18, 2023
+Name: ApplyFormulaToGroupOfFiles_v0.1.py
+Version: 0.1
+Created by: Nitin D. Patwari
 
-
+This python script has been created to automate the .csv file data extraction and processing.
 """
 
 
@@ -26,6 +30,7 @@ import xlsxwriter
 
 import webbrowser
 
+import os
 
 
 
@@ -40,6 +45,15 @@ def callback(url):
 
 
 
+
+def file_format_checker(file_name, expected_file_format):
+    
+    if (file_name[-len(expected_file_format):] == expected_file_format):
+        return 1
+    else:
+        return 0
+    
+    pass
 
 
 
@@ -71,64 +85,91 @@ def submitValues():
 
     try:
 
-        if (0<int(NumberOfFormulas)<11):               
-
-            for k in range(0, int(NumberOfFormulas)):
-
-                globals()['label_formulas_%s' %k] = tk.Label(window_main, text='Formula '+str(k+1)+':')
-
-                globals()['label_formulas_%s' %k].place(relx = 0.635, rely = 0.1+k*0.08)
-
-
-                globals()['entry_formulas_%s' %k] = tk.StringVar()
-
-                globals()['entry_widget_formulas_%s' %k] = tk.Entry(window_main, textvariable=globals()['entry_formulas_%s' %k])
-
-                globals()['entry_widget_formulas_%s' %k].pack()
-
-                globals()['entry_widget_formulas_%s' %k].place(relx = 0.755, rely = 0.1+k*0.08)
-
-
-
-
-            label_status_1 = tk.Label(window_main, text='1) REQUIRED DATA FOR PROCESSING CAPTURED!!', fg='green')
-
-            label_status_1.place(relx = 0.025, rely = 0.56)
-
-
-            label_status_2 = tk.Label(window_main, text='2) PLEASE ENTER FORMULA/S', fg='green')
-
-            label_status_2.place(relx = 0.025, rely = 0.62)
+        if (os.path.exists(WorkspacePath)):
             
+            if (file_format_checker(TargetFileName, ".csv") and os.path.isfile(WorkspacePath+'\\'+TargetFileName)):
+
+                if (file_format_checker(ResultFileName, ".xlsx")):
+
+                    if (0<int(NumberOfFormulas)<11):               
+
+                        for k in range(0, int(NumberOfFormulas)):
+
+                            globals()['label_formulas_%s' %k] = tk.Label(window_main, text='Formula '+str(k+1)+':')
+
+                            globals()['label_formulas_%s' %k].place(relx = 0.635, rely = 0.1+k*0.08)
 
 
-            submit.config(state='disabled')
+                            globals()['entry_formulas_%s' %k] = tk.StringVar()
 
-            entry_widget_WorkspacePath.config(state='disabled')
+                            globals()['entry_widget_formulas_%s' %k] = tk.Entry(window_main, textvariable=globals()['entry_formulas_%s' %k])
 
-            entry_widget_TargetFileName.config(state='disabled')
+                            globals()['entry_widget_formulas_%s' %k].pack()
 
-            entry_widget_ResultFileName.config(state='disabled')
+                            globals()['entry_widget_formulas_%s' %k].place(relx = 0.755, rely = 0.1+k*0.08)
 
-            entry_widget_NumberOfFormulas.config(state='disabled')
+                        
+
+                        label_status_1 = tk.Label(window_main, text='1) REQUIRED DATA FOR PROCESSING CAPTURED!!', fg='green')
+
+                        label_status_1.place(relx = 0.025, rely = 0.61)
+
+
+                        label_status_2 = tk.Label(window_main, text='2) PLEASE ENTER FORMULA/S', fg='green')
+
+                        label_status_2.place(relx = 0.025, rely = 0.66)
+                        
+
+
+                        submit.config(state='disabled')
+
+                        entry_widget_WorkspacePath.config(state='disabled')
+
+                        entry_widget_TargetFileName.config(state='disabled')
+
+                        entry_widget_ResultFileName.config(state='disabled')
+
+                        entry_widget_NumberOfFormulas.config(state='disabled')
 
 
 
-            apply.config(state='active')        
+                        apply.config(state='active')        
 
 
+
+                    else:
+
+                        tk.messagebox.showwarning(title="Enter valid number of formulas", message="Number of formulas must have value in between 1 to 10 including 1 and 10")
+
+                        pass        
+
+                    pass
+
+                else:
+
+                    tk.messagebox.showwarning(title="Enter .xlsx file name", message="Result file extension must be .xlsx")
+
+                    pass
+
+
+                pass
+
+            else:
+
+                tk.messagebox.showwarning(title="Enter .csv file name", message="Enter correct target file name or check .csv extension")
+
+                pass
 
         else:
-
-            tk.messagebox.showwarning(title="Enter valid number of formulas", message="Number of formulas must have value in between 1 to 10 including 1 and 10")
-
-            pass        
-
+            
+            tk.messagebox.showwarning(title="Enter workspace file name", message="Enter correct workspace path")
+            
+            pass
 
 
     except:
 
-        tk.messagebox.showwarning(title="Enter valid data", message="Enter valid values of each field.")
+        tk.messagebox.showwarning(title="Enter valid number of formulas", message="Enter valid number of formulas.")
 
 
 
@@ -198,7 +239,7 @@ def applyFormulas():
 
                         if(globals()['entry_formulas_%s' %k].get()==""):
 
-                            raise Exception("Enter valid formulas")
+                            raise Exception("Enter formulas")
 
 
                         globals()['worksheet%s' %file_count].write_formula('ZZ'+str(k+1), globals()['entry_formulas_%s' %k].get())
@@ -245,7 +286,7 @@ def applyFormulas():
 
         label_status_3 = tk.Label(window_main, text='3) TASK COMPLETED SUCCESSFULLY', fg='green')
 
-        label_status_3.place(relx = 0.025, rely = 0.68)
+        label_status_3.place(relx = 0.025, rely = 0.71)
 
 
         label_status_final = tk.Label(window_main, text='TASK COMPLETED!!', bg='green', fg='white')
@@ -367,7 +408,7 @@ label_formula_section = tk.Label(window_main, text='FORMULAS:', font=("Calibri",
 label_formula_section.place(relx = 0.635, rely = 0.02)
 
 
-label_formula_section = tk.Label(window_main, text='EXECUTION STATUS:', font=("Calibri",12,"bold"))
+label_formula_section = tk.Label(window_main, text='EXECUTION ACTION:', font=("Calibri",12,"bold"))
 
 label_formula_section.place(relx = 0.025, rely = 0.49)
 
@@ -530,6 +571,10 @@ apply.place(relx = 0.635, rely = 0.9)
 
 apply.config(state='disabled')
 
+
+label_status_0 = tk.Label(window_main, text='PLEASE ENTER REQUIRED DATA', fg='green')
+
+label_status_0.place(relx = 0.025, rely = 0.55)
  
 
 
