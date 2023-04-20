@@ -27,7 +27,7 @@ A] Tool_1: ApplyFormulasToGroupOfFiles_SameName_v0.1
 
 
 
-A] Tool_2: ApplyFormulasToGroupOfFiles_DifferentName_v0.1
+B] Tool_2: ApplyFormulasToGroupOfFiles_DifferentName_v0.1
 
 1. Information:
 - If you want to manually extract data from multiple .csv files with the different names, it will take a lot of time.
