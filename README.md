@@ -17,5 +17,4 @@ A] Tool_1: ApplyFormulasToGroupOfFiles_SameName_v0.1
 - Simply download the.exe file from the repository (you will receive an unsafe warning from Explorer; choose to keep downloading).
 - After downloading the.exe file, follow the "EXECUTION ACTION" section's instructions.
 
-![image](https://user-images.githubusercontent.com/87736424/233184479-42addd37-7844-4502-a3f3-56a3a2f62f8d.png)
-
+![image](https://user-images.githubusercontent.com/87736424/233225823-f2eef0f8-1818-4d13-91c5-639b93c45b07.png)
