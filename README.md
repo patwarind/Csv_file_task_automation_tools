@@ -1,14 +1,14 @@
-# Excel_automation_tools
-Tools used for excel task automation
+# Csv_file_task_automation_tools
+Tools used for .csv file task automation
 
-I am designing tools to speed up some tasks involving .csv and .xlsx file format. 
+I am designing tools to speed up some tasks involving .csv file format. 
 
 
-A] Tool_1: ApplyFormulasToGroupOfFiles_v0.1
+A] Tool_1: ApplyFormulasToGroupOfFiles_SameName_v0.1
 
 1. Information:
-- If you want to manually extract data from multiple files with the same name, it will take a lot of time.
-- "ApplyFormulasToGroupOfFiles_v0.1" is a utility I developed to address this issue.
+- If you want to manually extract data from multiple .csv files with the same name, it will take a lot of time.
+- "ApplyFormulasToGroupOfFiles_SameName_v0.1" is a utility I developed to address this issue.
 - The current version of this tool is 0.1.
 - .csv is the accepted input file type.
 - The generated output file is an.xlsx.
