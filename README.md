@@ -57,3 +57,6 @@ C] Tool_3: MergeMultipleCSVFiles_v0.1
 2. How to use this tool?:
 - Simply download the.exe file from the repository (you will receive an unsafe warning from Explorer; choose to keep downloading).
 - After downloading the.exe file, follow the "EXECUTION ACTION" section's instructions.
+
+![image](https://user-images.githubusercontent.com/87736424/236275475-5cc2c8d2-f845-4b36-9222-2a615017b2e1.png)
+
